@@ -1,11 +1,10 @@
-rootProject.name = "springboot-simple-template"
+rootProject.name = "virtual-drivers-gpt"
 
 include(
-    "subp-persistence",
-    "subp-api-client",
-    "subp-cache",
-    "subp-common",
-    "subp-server"
+    "virtual-drivers-gpt-persistence",
+    "virtual-drivers-gpt-api-client",
+    "virtual-drivers-gpt-common",
+    "virtual-drivers-gpt-server"
 )
 
 enableFeaturePreview("VERSION_CATALOGS")

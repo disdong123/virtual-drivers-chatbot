@@ -1,18 +1,18 @@
 services:
   mysql:
-    container_name: springboot_simple_template_mysql
+    container_name: virtual_drivers_gpt_mysql
     image: mysql:8
     ports:
       - '3300:3306'
     environment:
       TZ: 'Asia/Seoul'
-      MYSQL_DATABASE: springboot_simple_template
+      MYSQL_DATABASE: virtual_drivers
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     volumes:
       - ./infra/mysql/data:/var/lib/mysql
     networks:
-      - springboot-simple-template
+      - virtual-drivers-gpt
 networks:
-  springboot-simple-template:
-    name: springboot-simple-template
+  virtual-drivers-gpt:
+    name: virtual-drivers-gpt
     driver: bridge
