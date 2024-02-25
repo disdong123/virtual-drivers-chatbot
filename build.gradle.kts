@@ -30,6 +30,7 @@ subprojects {
     apply(plugin = libs.plugins.ktlint.get().pluginId)
 
     dependencies {
+        implementation(platform(libs.spring.cloud.dependencies))
         implementation(libs.kotlin.reflect)
         implementation(libs.kotlin.stdlib.jdk8)
         implementation(libs.jackson.module.kotlin)
