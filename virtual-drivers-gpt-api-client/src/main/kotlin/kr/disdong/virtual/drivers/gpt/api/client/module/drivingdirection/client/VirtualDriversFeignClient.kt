@@ -1,6 +1,7 @@
 package kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.client
 
 import kr.disdong.virtual.drivers.gpt.api.client.core.config.feign.DefaultFeignConfig
+import kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.dto.DrivingDirectionEntity
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -21,15 +22,24 @@ data class DrivingDirectionApiRequest(
 )
 
 data class DrivingDirectionApiResponse(
-    val body: Body
+    val data: Data
 ) {
-    data class Body(
-        val startPosition: Position?,
-        val endPosition: Position?,
-        val distance: Int?,
-        val duration: Int?,
-        val route: List<Position>?,
+    data class Data(
+        val startPosition: Position,
+        val endPosition: Position,
+        val distance: Int,
+        val duration: Int,
+        val route: List<Position>,
     )
+
+    fun toDrivingDirectionEntity(): DrivingDirectionEntity {
+        return DrivingDirectionEntity(
+            startPosition = data.startPosition,
+            endPosition = data.endPosition,
+            distance = data.distance,
+            duration = data.duration,
+        )
+    }
 }
 
 data class Position(
