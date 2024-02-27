@@ -11,8 +11,8 @@ services:
     volumes:
       - ./infra/mysql/data:/var/lib/mysql
     networks:
-      - virtual-drivers-gpt
+      - virtual-drivers-chatbot
 networks:
-  virtual-drivers-gpt:
-    name: virtual-drivers-gpt
+  virtual-drivers-chatbot:
+    name: virtual-drivers-chatbot
     driver: bridge
