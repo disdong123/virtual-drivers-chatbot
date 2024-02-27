@@ -1,9 +1,9 @@
 package kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.dto
 
 import com.fasterxml.jackson.annotation.JsonPropertyDescription
-import kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.client.DrivingDirectionApiRequest
+import kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.client.CreateDrivingDirectionApiRequest
 
-data class DrivingDirectionGeneratorRequest(
+data class CreateDrivingDirectionRequest(
     @get:JsonPropertyDescription("출발지 주소. ex) 서울특별시 강남구 강남대로 396")
     val startAddress: String,
     @get:JsonPropertyDescription("출발지 위도. ex) 37.001")
@@ -17,7 +17,7 @@ data class DrivingDirectionGeneratorRequest(
     @get:JsonPropertyDescription("도착지 경도. ex) 127.002")
     val endLongitude: Double,
 ) {
-    fun toDrivingDirectionApiRequest() = DrivingDirectionApiRequest(
+    fun toDrivingDirectionApiRequest() = CreateDrivingDirectionApiRequest(
         startAddress = startAddress,
         startLatitude = startLatitude,
         startLongitude = startLongitude,

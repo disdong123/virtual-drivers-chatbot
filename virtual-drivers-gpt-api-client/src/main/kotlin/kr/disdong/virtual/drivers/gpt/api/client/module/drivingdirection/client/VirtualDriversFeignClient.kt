@@ -1,18 +1,39 @@
 package kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.client
 
 import kr.disdong.virtual.drivers.gpt.api.client.core.config.feign.DefaultFeignConfig
-import kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.dto.DrivingDirectionEntity
+import kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.dto.DrivingDirection
 import org.springframework.cloud.openfeign.FeignClient
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient(name = "VirtualDriversFeignClient", url = "\${virtual-drivers.base-url}", configuration = [DefaultFeignConfig::class])
 interface VirtualDriversFeignClient {
+    @GetMapping("/api/translation/address")
+    fun getPositionByAddress(
+        @RequestParam("address") address: String,
+        @RequestParam("translationType") translationType: String,
+    ): GetPositionByAddressApiResponse
+
     @PostMapping("/api/driving-direction")
-    fun createDrivingDirection(@RequestBody request: DrivingDirectionApiRequest): DrivingDirectionApiResponse
+    fun createDrivingDirection(@RequestBody request: CreateDrivingDirectionApiRequest): CreateDrivingDirectionApiResponse
 }
 
-data class DrivingDirectionApiRequest(
+data class GetPositionByAddressApiResponse(
+    val data: Position
+) {
+    fun toPosition(): Position {
+        return data
+    }
+}
+
+enum class AddressTranslationType {
+    POSITION,
+    JIBUN,
+}
+
+data class CreateDrivingDirectionApiRequest(
     val startAddress: String,
     val startLatitude: Double,
     val startLongitude: Double,
@@ -21,7 +42,7 @@ data class DrivingDirectionApiRequest(
     val endLongitude: Double,
 )
 
-data class DrivingDirectionApiResponse(
+data class CreateDrivingDirectionApiResponse(
     val data: Data
 ) {
     data class Data(
@@ -32,8 +53,8 @@ data class DrivingDirectionApiResponse(
         val route: List<Position>,
     )
 
-    fun toDrivingDirectionEntity(): DrivingDirectionEntity {
-        return DrivingDirectionEntity(
+    fun toDrivingDirection(): DrivingDirection {
+        return DrivingDirection(
             startPosition = data.startPosition,
             endPosition = data.endPosition,
             distance = data.distance,
