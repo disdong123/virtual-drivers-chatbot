@@ -1,17 +1,12 @@
-# Springboot template
+# Virtual drivers chatbot
 
-SpringBoot 기반 서버 구현을 위한 템플릿입니다.
+[virtual-drivers api](https://github.com/disdong123/virtual-drivers) 를 이용하여 출/도착지 주소를 입력하면 경로를 생성하는 챗봇입니다.
 
+openai api 의 FunctionCall 기능을 이용합니다.
 
 ### Flow
 ```mermaid
-flowchart TB
-  Client --->|Dto| Service
-  Service ---|Domain object| DORepository[DO Repository]
-  DORepository ---|Domain object| JpaRepository[Jpa Repository]
-  DORepository ---|Domain object| JdbcRepository[Jdbc Repository]
-  DORepository -.-|Domain object| SomeRepository[Some Repository]
-  JpaRepository ---|Entity| Database
-  JdbcRepository ---|Entity| Database
-  SomeRepository -.-|Entity| Database
+flowchart RL
+  OpenAi[openai] --- VirtualDriversChatbot[virtual drivers chatbot] ---> Client
+  VirtualDriversServer[virtual drivers server] --- VirtualDriversChatbot
 ```
