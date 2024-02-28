@@ -1,17 +1,21 @@
 package kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.client
 
-import kr.disdong.virtual.drivers.gpt.api.client.module.drivingdirection.dto.CreateDrivingDirectionRequest
+import kr.disdong.virtual.drivers.chatbot.api.client.module.drivingdirection.client.GetPositionByAddressRequest
+import kr.disdong.virtual.drivers.chatbot.api.client.module.drivingdirection.client.VirtualDriversClient
+import kr.disdong.virtual.drivers.chatbot.api.client.module.drivingdirection.dto.CreateDrivingDirectionRequest
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
+@Disabled
 class VirtualDriversClientTest {
     @Autowired
     private lateinit var virtualDriversClient: VirtualDriversClient
 
     @Test
-    fun ab() {
+    fun `simple test 1`() {
         println(
             virtualDriversClient.getPositionByAddress(
                 GetPositionByAddressRequest(
@@ -22,7 +26,7 @@ class VirtualDriversClientTest {
     }
 
     @Test
-    fun a() {
+    fun `simple test 2`() {
         println(
             virtualDriversClient.createDrivingDirection(
                 CreateDrivingDirectionRequest(

@@ -6,7 +6,6 @@ server:
 spring:
   config:
     import:
-      - persistence.yaml
       - api-client.yaml
 
 springdoc:

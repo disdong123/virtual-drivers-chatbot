@@ -1,7 +1,6 @@
 rootProject.name = "virtual-drivers-chatbot"
 
 include(
-    "virtual-drivers-chatbot-persistence",
     "virtual-drivers-chatbot-api-client",
     "virtual-drivers-chatbot-common",
     "virtual-drivers-chatbot-server"
