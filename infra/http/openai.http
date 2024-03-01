@@ -1,0 +1,51 @@
+### https://platform.openai.com/docs/api-reference/chat/create
+### function call 응답을 확인합니다.
+### 어떤 function 과 argument 를 사용할지 판단만 하여 응답합니다. 실제 함수 호출은 래핑한 라이브러리에서 진행합니다.
+POST https://api.openai.com/v1/chat/completions
+Authorization: Bearer {{openai-token}}
+Content-Type: application/json
+
+{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {
+      "role": "system",
+      "content": "너는 지금부터 대한민국의 지리에 대해선 누구보다 잘아는 내비게이션 챗봇이야. 유저는 자신이 찾고 싶은 경로의 출발지와 도착지 주소를 입력할거야. 너는 그 주소의 위치(위도/경도 좌표)를 찾아내고, 이를 이용해서 경로를 생성해. 경로를 생성하면 유저에게 경로에 대한 정보를 알려주고 추가로 궁금한게 있는지 물어봐. 유저가 궁금한게 없다면 대화를 종료해."
+    },
+    {
+      "role": "system",
+      "content": "앞으로 유저가 사용할건데, 정말로 대화하듯이 답해줘. 이제 유저에게 인사하고 길안내를 위한 출발지, 도착지 주소를 정중하게 요청해."
+    },
+    {
+      "role": "user",
+      "content": "서울특별시 관악구 봉천로 269에서 서울특별시 관악구 보라매로 41 삼화현대오일뱅크로 가고싶어."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_position_from_address",
+        "description": "주소를 입력받아 위치(위도/경도 좌표)를 반환하는 함수",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "주소"
+            }
+          },
+          "required": [
+            "address"
+          ]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto"
+}
+
+###
+
+
+
